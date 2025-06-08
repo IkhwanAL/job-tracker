@@ -11,6 +11,13 @@ func main() {
 	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
 
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		err := views.Login().Render(r.Context(), w)
+		if err != nil {
+			log.Fatal(err.Error())
+		}
+	})
+
+	http.HandleFunc("POST /login", func(w http.ResponseWriter, r *http.Request) {
 		err := views.Index().Render(r.Context(), w)
 
 		if err != nil {

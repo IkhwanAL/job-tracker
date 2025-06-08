@@ -1,0 +1,27 @@
+package views
+
+import "github.com/IkhwanAL/job-tracker/views/components"
+
+templ Login() {
+    <!DOCTYPE html>
+    <html lang="en">
+        @components.Header()
+        <body>
+            <div class="form-wrapper">
+                <form hx-post="/login" class="center-form" hx-target=".form-wrapper" hx-swap="innerHTML" hx-push-url="/">
+                    <h3>Login</h3>
+                    <div class="form-group">
+                        <label>Username</label>
+                        <input type="text" name="username" placeholder="Joe">
+                    </div>
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input type="password" name="password">
+                    </div>
+                    <button class="btn">Login</button>
+                </form>
+            </div>
+            @components.Footer()
+        </body>
+    </html>
+}
