@@ -39,3 +39,7 @@ tmp
 *_templ.go
 
 views/components/*_templ.go
+
+seed.go
+
+*.db
