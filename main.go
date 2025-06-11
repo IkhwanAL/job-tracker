@@ -52,8 +52,9 @@ func main() {
 		result, err := queries.GetUser(r.Context(), sql.NullString{String: username, Valid: true})
 
 		if err != nil {
-			//TODO Add Something To Trigger 404 or Something Error Show upa
+			//TODO Add Something To Trigger 404 or Something Error Show up
 			fmt.Printf("username not exists %s", err.Error())
+			w.Header().Set("HX-Swap", "none")
 			return
 		}
 
@@ -61,6 +62,7 @@ func main() {
 
 		if err != nil {
 			fmt.Print("password is not the same")
+			w.Header().Set("HX-Swap", "none")
 			return
 		}
 

@@ -7,8 +7,17 @@ templ Login() {
     <html lang="en">
         @components.Header()
         <body>
-            <div class="form-wrapper">
-                <form hx-post="/login" class="center-form" hx-target=".form-wrapper" hx-swap="innerHTML" hx-push-url="/">
+            <div class="popup notification success" id="notification">
+                <div class="popup-header">
+                    <h3 class="popup-title">Success!</h3>
+                    <button class="popup-close" onclick="hideNotification()">&times;</button>
+                </div>
+                <div class="popup-content">
+                    <p>Your action was completed successfully.</p>
+                </div>
+            </div>
+            <div class="wrapper">
+                <form hx-post="/login" class="center-form" hx-swap="outerHTML">
                     <h3>Login</h3>
                     <div class="form-group">
                         <label>Username</label>
