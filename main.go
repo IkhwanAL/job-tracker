@@ -1,21 +1,25 @@
 package main
 
+// Abandon all hope, ye who code here
+
 import (
 	"database/sql"
 	"fmt"
 	"log"
 	"net/http"
+	"time"
 
 	_ "github.com/mattn/go-sqlite3"
 
 	"github.com/IkhwanAL/job-tracker/dbService"
 	"github.com/IkhwanAL/job-tracker/utility/cryptography"
 	"github.com/IkhwanAL/job-tracker/views"
+	"github.com/IkhwanAL/job-tracker/views/components"
 	"github.com/joho/godotenv"
 )
 
 func main() {
-	// runSeed()
+	// tmp.RunSeed()
 
 	err := godotenv.Load(".env")
 
@@ -52,17 +56,29 @@ func main() {
 		result, err := queries.GetUser(r.Context(), sql.NullString{String: username, Valid: true})
 
 		if err != nil {
-			//TODO Add Something To Trigger 404 or Something Error Show up
-			fmt.Printf("username not exists %s", err.Error())
-			w.Header().Set("HX-Swap", "none")
+			w.Header().Set("Content-Type", "text/html")
+			w.Header().Set("HX-Retarget", "#error-container")
+			w.Header().Set("HX-Reswap", "innerHTML")
+			err := components.Popup("username does not exists", "error").Render(r.Context(), w)
+			if err != nil {
+				log.Fatal(err.Error())
+			}
 			return
 		}
-
+		t1 := time.Now()
 		err = cryptography.Compare([]byte(password), []byte(result.Password))
+		t2 := time.Now()
+
+		fmt.Println(16, ": ", t2.Sub(t1))
 
 		if err != nil {
-			fmt.Print("password is not the same")
-			w.Header().Set("HX-Swap", "none")
+			w.Header().Set("Content-Type", "text/html")
+			w.Header().Set("HX-Retarget", "#error-container")
+			w.Header().Set("HX-Reswap", "innerHTML")
+			err := components.Popup("password does not match", "error").Render(r.Context(), w)
+			if err != nil {
+				log.Fatal(err.Error())
+			}
 			return
 		}
 

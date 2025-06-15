@@ -122,6 +122,10 @@
     border-left: 4px solid #28a745;
 }
 
+.popup.error {
+    border-left: 4px solid red;
+}
+
 footer {
     display: inline-block;
 }

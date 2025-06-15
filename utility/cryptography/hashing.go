@@ -6,9 +6,9 @@ import (
 	"golang.org/x/crypto/bcrypt"
 )
 
-func HashPassword(password []byte) ([]byte, error) {
+func HashPassword(password []byte, cost int) ([]byte, error) {
 
-	bytes, err := bcrypt.GenerateFromPassword(password, 16)
+	bytes, err := bcrypt.GenerateFromPassword(password, cost)
 
 	if err != nil {
 		return nil, fmt.Errorf("failed to hash password %s", err)
@@ -19,6 +19,5 @@ func HashPassword(password []byte) ([]byte, error) {
 
 func Compare(plainText []byte, hashPassword []byte) error {
 	err := bcrypt.CompareHashAndPassword(hashPassword, plainText)
-
 	return err
 }

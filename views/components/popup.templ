@@ -1,0 +1,23 @@
+package components
+
+templ Popup(message string, status string) {
+    <div class={"popup", "notification", status} id="notification">
+        <div class="popup-header">
+            <h3 class="popup-title">{message}</h3>
+            <button class="popup-close" onclick="hideNotification()">&times;</button>
+        </div>
+        <div class="popup-content">
+            <p>Your action was completed successfully.</p>
+        </div>
+        <script>
+            setTimeout(function() {
+                const errorElement = document.getElementById('notification');
+                if (errorElement) {
+                    errorElement.style.transition = 'opacity 0.5s';
+                    errorElement.style.opacity = '0';
+                    setTimeout(() => errorElement.remove(), 500);
+                }
+            }, 1500);
+        </script>
+    </div>
+}
