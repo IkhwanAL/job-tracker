@@ -1,4 +1,4 @@
-package views
+package page
 
 import "github.com/IkhwanAL/job-tracker/views/components"
 
@@ -8,7 +8,7 @@ templ Login() {
         @components.Header()
         <body>
             <div class="wrapper">
-                <form hx-post="/login" class="center-form" hx-swap="outerHTML">
+                <form hx-post="/login" class="center-form" hx-swap="outerHTML" hx-target=".wrapper">
                     <h3>Login</h3>
                     <div class="form-group">
                         <label>Username</label>

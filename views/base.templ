@@ -1,0 +1,14 @@
+package views
+
+import "github.com/IkhwanAL/job-tracker/views/components"
+
+templ Index(page templ.Component) {
+    <!DOCTYPE html>
+    <html lang="en">
+        @components.Header()
+        <body>
+        @page
+        @components.Footer()
+        </body>
+    </html>
+}
