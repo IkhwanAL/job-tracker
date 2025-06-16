@@ -1,29 +1,24 @@
 package page
 
-import "github.com/IkhwanAL/job-tracker/views/components"
+script doThing() {
+
+}
 
 templ Login() {
-    <!DOCTYPE html>
-    <html lang="en">
-        @components.Header()
-        <body>
-            <div class="wrapper">
-                <form hx-post="/login" class="center-form" hx-swap="outerHTML" hx-target=".wrapper">
-                    <h3>Login</h3>
-                    <div class="form-group">
-                        <label>Username</label>
-                        <input type="text" name="username" placeholder="Joe">
-                    </div>
-                    <div class="form-group">
-                        <label>Password</label>
-                        <input type="password" name="password">
-                    </div>
-                    <button class="btn">Login</button>
-                </form>
+    <div class="wrapper">
+        <form hx-post="/login" class="center-form" hx-swap="innerHTML" hx-target="#main-content">
+            <h3>Login</h3>
+            <div class="form-group">
+                <label>Username</label>
+                <input type="text" name="username" placeholder="Joe">
             </div>
-            <div id="error-container">
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" name="password">
             </div>
-            @components.Footer()
-        </body>
-    </html>
+            <button class="btn">Login</button>
+        </form>
+    </div>
+    <div id="error-container">
+    </div>
 }

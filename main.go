@@ -11,8 +11,8 @@ import (
 
 	"github.com/IkhwanAL/job-tracker/dbService"
 	"github.com/IkhwanAL/job-tracker/utility/cryptography"
-	"github.com/IkhwanAL/job-tracker/views"
 	"github.com/IkhwanAL/job-tracker/views/components"
+	"github.com/IkhwanAL/job-tracker/views/layouts"
 	page "github.com/IkhwanAL/job-tracker/views/webpage"
 	"github.com/joho/godotenv"
 )
@@ -41,7 +41,7 @@ func main() {
 	mux.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
 
 	mux.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		err := views.Index(page.Login()).Render(r.Context(), w)
+		err := layouts.BaseLayout(page.Login()).Render(r.Context(), w)
 		if err != nil {
 			log.Fatal(err.Error())
 		}
@@ -78,7 +78,7 @@ func main() {
 			return
 		}
 
-		err = views.Index(page.Main()).Render(r.Context(), w)
+		err = layouts.BaseLayout(page.Main()).Render(r.Context(), w)
 
 		if err != nil {
 			log.Fatal(err.Error())
